@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import CoinGecko from 'coingecko-api';
 import Head from 'next/head';
 
@@ -18,8 +18,22 @@ const Home: NextPage = (props: any) => {
         <thead>
           <tr>
             <th>Symbol</th>
+            <th>24H Change</th>
+            <th>Price</th>
+            <th>Market Cap</th>
           </tr>
         </thead>
+        <tbody>
+          {data.map((coin: any) => {
+            console.log(coin);
+            return <tr key={coin.id}>
+              <td>{coin.symbol.toUpperCase()}</td>
+              <td>{coin.price_change_percentage_24h}</td>
+              <td>{coin.current_price}</td>
+              <td>{coin.market_cap}</td>
+            </tr>
+          })}
+        </tbody>
       </table>
     </div>
   )
